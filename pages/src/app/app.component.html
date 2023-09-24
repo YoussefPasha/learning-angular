@@ -1,0 +1,49 @@
+<div>
+  <nav class="container d-flex-column justify-content-center">
+    <ul class="pagination">
+      <li class="page-item" [ngClass]="{ disabled: currentPage === 0 }">
+        <a
+          class="page-link"
+          style="cursor: pointer"
+          (click)="currentPage = currentPage - 1"
+          >Previous</a
+        >
+      </li>
+      <ng-container *ngFor="let image of images; let i = index">
+        <li
+          class="page-item"
+          [ngClass]="{ active: i === currentPage }"
+          *ngIf="checkWindowIndex(i)"
+        >
+          <a
+            style="cursor: pointer"
+            (click)="currentPage = i"
+            class="page-link"
+            >{{ i + 1 }}</a
+          >
+        </li>
+      </ng-container>
+      <li
+        class="page-item"
+        [ngClass]="{ disabled: currentPage === images.length - 1 }"
+      >
+        <a
+          class="page-link"
+          style="cursor: pointer"
+          (click)="currentPage = currentPage + 1"
+          href="#"
+          >Next</a
+        >
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container d-flex-column justify-content-center">
+    <h4 appClass>{{ images[currentPage].title }}</h4>
+    <img
+      style="width: 50vw; height: 80vh"
+      class="card-img"
+      [src]="images[currentPage].url"
+    />
+  </div>
+</div>
